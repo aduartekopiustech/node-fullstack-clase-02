@@ -336,9 +336,10 @@ Después de instalar ambas dependencias, nuestro archivo `package.json` tendrá 
   "name": "clase-02-bases",
   "version": "1.0.0",
   "type": "module",
+  "main": "src/app.js"
   "scripts": {
-    "start": "node src/app.js",
-    "dev": "nodemon src/app.js"
+    "start": "node .",
+    "dev": "nodemon ."
   },
   "dependencies": {
     "axios": "^1.x.x"
