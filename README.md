@@ -1,29 +1,55 @@
-Contenido
+<div align="center">
 
-1. Package.json, scritps
-2. Modulos, importaciones y exportaciones
-3. Node_modules, dependencias de producción y desarrollo
-4. Reforzamiento de JS para Node.js
-   - Functions
-   - Callbacks
-   - Factory Functions
-   - Adapter Pattern
-   - Promises
-   - Async Await
-   - Objects
-   - Arrays
+<a href="https://nodejs.org/en" target="_blank"><img src="https://user-images.githubusercontent.com/3438503/260495760-ca5d8c24-b382-43d9-8fbe-d905b4b208f0.png" width="260" alt="Logo de Node.js" /></a>
 
-## Package.json, node_modules, scritps.
+# Clase 2 de NodeJS
 
-**Tarea 003 — Creación de nuestra primera aplicación con Node.js**
+### Kopius · The Academy · Cohort 05 · M2
 
-- **Objetivo**
+**Generalidades de Node y reforzamiento de JavaScript necesarios para el desarrollo con Node.js**
 
-Crear y ejecutar nuestra primera aplicación con Node.js, familiarizándonos con la estructura básica de un proyecto, el uso de NPM y la configuración del archivo `package.json`.
+![Node.js](https://img.shields.io/badge/Node.js-24.x-5FA04E?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
 
-Al finalizar esta tarea, deberemos ser capaces de ejecutar nuestra aplicación utilizando el comando `npm start`.
+</div>
 
-- **Procedimiento**
+---
+
+## CONTENIDO
+
+1. [Package.json, node_modules y scripts](#1-packagejson-node_modules-y-scripts)
+   - [Tarea 003: Creación de nuestra primera aplicación con Node.js](#tarea-003-creación-de-nuestra-primera-aplicación-con-nodejs)
+2. [Módulos, importaciones y exportaciones](#2-módulos-importaciones-y-exportaciones)
+   - [CommonJS: module.exports y require()](#commonjs-moduleexports-y-require)
+   - [Tarea 004: Importación y exportación de módulos en Node.js](#tarea-004-importación-y-exportación-de-módulos-en-nodejs)
+3. [Node_modules, dependencias de producción y desarrollo](#3-node_modules-dependencias-de-producción-y-desarrollo)
+   - [Dependencias de producción](#dependencias-de-producción)
+   - [Dependencias de desarrollo](#dependencias-de-desarrollo)
+   - [Nuestro archivo package.json](#nuestro-archivo-packagejson)
+   - [¿Por qué es importante diferenciarlas?](#por-qué-es-importante-diferenciarlas)
+4. [Reforzamiento de JavaScript](#4-reforzamiento-de-javascript)
+   - [4.1 Functions](#41-functions)
+   - [4.2 Callbacks](#42-callbacks)
+   - [4.3 Factory Functions](#43-factory-functions)
+5. [Referencias](#referencias)
+
+---
+
+## 1. Package.json, node_modules y scripts
+
+El archivo `package.json` es el documento de identidad de un proyecto Node.js: declara su nombre, su versión, sus dependencias y los comandos que podemos ejecutar con NPM.
+
+### Tarea 003: Creación de nuestra primera aplicación con Node.js
+
+> [!IMPORTANT]
+> **Objetivo**
+>
+> Crear y ejecutar nuestra primera aplicación con Node.js, familiarizándonos con la estructura básica de un proyecto, el uso de NPM y la configuración del archivo `package.json`.
+>
+> Al finalizar esta tarea, deberemos ser capaces de ejecutar nuestra aplicación utilizando el comando `npm start`.
+
+#### Procedimiento
 
 **1. Crear el directorio del proyecto**
 
@@ -39,15 +65,17 @@ npm init
 
 Durante la inicialización, completar los siguientes campos:
 
-- **package name:** `clase-02-bases`
-- **version:** mantener `1.0.0` o utilizar `0.0.1` siguiendo el versionado semántico.
-- **description:** `Mi primera aplicación con Node.js`
-- **entry point:** mantener `index.js`.
-- **test command:** dejar vacío.
-- **git repository:** URL del repositorio de GitHub (opcional).
-- **keywords:** dejar vacío.
-- **author:** nombre del desarrollador.
-- **license:** mantener el valor predeterminado `ISC`.
+| Campo              | Valor                                                      |
+| ------------------ | ---------------------------------------------------------- |
+| **package name**   | `clase-02-bases`                                           |
+| **version**        | mantener `1.0.0` o utilizar `0.0.1` (versionado semántico) |
+| **description**    | `Mi primera aplicación con Node.js`                        |
+| **entry point**    | mantener `index.js`                                        |
+| **test command**   | dejar vacío                                                |
+| **git repository** | URL del repositorio de GitHub (opcional)                   |
+| **keywords**       | dejar vacío                                                |
+| **author**         | nombre del desarrollador                                   |
+| **license**        | mantener el valor predeterminado `ISC`                     |
 
 Finalmente, confirmar la configuración:
 
@@ -80,19 +108,24 @@ console.log("My first Node.js app");
 
 Utilizando la terminal, ejecutar nuestra aplicación y comprobar que el mensaje se muestra correctamente.
 
-- Desafío
+> [!TIP]
+> **Desafío**
+>
+> Ahora que conseguimos ejecutar nuestro primer programa, debemos resolver el siguiente problema:
+>
+> **¿Qué necesitamos configurar en el archivo `package.json` para ejecutar nuestra aplicación utilizando únicamente el comando `npm start`?**
+>
+> Investigar el funcionamiento de los scripts de NPM, realizar los cambios necesarios y comprobar que la aplicación se ejecuta correctamente.
 
-Ahora que conseguimos ejecutar nuestro primer programa, debemos resolver el siguiente problema:
+<sub>[⬆ Volver al índice](#contenido)</sub>
 
-**¿Qué necesitamos configurar en el archivo `package.json` para ejecutar nuestra aplicación utilizando únicamente el comando `npm start`?**
+---
 
-Investigar el funcionamiento de los scripts de NPM, realizar los cambios necesarios y comprobar que la aplicación se ejecuta correctamente.
+## 2. Módulos, importaciones y exportaciones
 
-## Modulos, importaciones y exportaciones.
+### ¿Qué son los módulos en Node.js?
 
-**1. ¿Qué son los módulos en Node.js?**
-
-Un módulo es un archivo JavaScript que contiene código reutilizable y que puede ser utilizado desde otros archivos de nuestra aplicación.
+Un **módulo** es un archivo JavaScript que contiene código reutilizable y que puede ser utilizado desde otros archivos de nuestra aplicación.
 
 La modularización nos permite:
 
@@ -100,21 +133,24 @@ La modularización nos permite:
 - **Reutilizar:** utilizar funciones y constantes en diferentes partes del proyecto.
 - **Mantener:** facilitar la lectura, modificación y mantenimiento del código.
 
-Node.js soporta dos sistemas principales de módulos: **CommonJS** (`require` y `module.exports`) y **ECMAScript Modules** (`import` y `export`).
+Node.js soporta dos sistemas principales de módulos:
 
-En esta clase trabajaremos con CommonJS.
+| Sistema                      | Importar    | Exportar         | Observaciones                             |
+| ---------------------------- | ----------- | ---------------- | ----------------------------------------- |
+| **CommonJS**                 | `require()` | `module.exports` | El sistema que utilizaremos en esta clase |
+| **ECMAScript Modules (ESM)** | `import`    | `export`         | Requiere habilitar ESM en el proyecto     |
 
-**2. Exportar e importar módulos**
+### CommonJS: module.exports y require()
 
-### module.exports — Exportar
+**`module.exports` — Exportar**
 
 La propiedad `module.exports` permite exponer valores desde un archivo JavaScript para que puedan ser utilizados en otro módulo.
 
-### require() — Importar
+**`require()` — Importar**
 
 La función `require()` permite cargar un módulo y acceder al valor que este exporta mediante `module.exports`.
 
-**Ejemplo práctico**
+#### Ejemplo práctico
 
 Supongamos que tenemos un archivo llamado `math.js` que contiene una función para sumar dos números.
 
@@ -126,7 +162,7 @@ src/
 └── math.js
 ```
 
-**Archivo: math.js**
+**Archivo: `math.js`**
 
 ```javascript
 const sum = (a, b) => a + b;
@@ -134,7 +170,7 @@ const sum = (a, b) => a + b;
 module.exports = sum;
 ```
 
-**Archivo: app.js**
+**Archivo: `app.js`**
 
 ```javascript
 const sum = require("./math");
@@ -156,17 +192,17 @@ En este ejemplo:
 - `require('./math')` importa la función desde el archivo `math.js`.
 - `app.js` utiliza la función importada para realizar una operación.
 
-**Importante:** el ejemplo utiliza CommonJS, por lo que el proyecto no debe configurar `"type": "module"` en `package.json`.
+> [!NOTE]
+> El ejemplo utiliza **CommonJS**, por lo que el proyecto no debe configurar `"type": "module"` en `package.json`.
 
----
+### Tarea 004: Importación y exportación de módulos en Node.js
 
-**Tarea 004 — Importación y exportación de módulos en Node.js**
+> [!IMPORTANT]
+> **Objetivo**
+>
+> Aprender a organizar nuestro código en módulos reutilizables, exportando una variable que contiene la fecha y hora actual e importándola desde nuestra aplicación principal mediante CommonJS.
 
-- **Objetivo**
-
-Aprender a organizar nuestro código en módulos reutilizables, exportando una variable que contiene la fecha y hora actual e importándola desde nuestra aplicación principal mediante CommonJS.
-
-- **Procedimiento**
+#### Procedimiento
 
 **1. Crear el directorio de utilidades**
 
@@ -203,13 +239,14 @@ En este ejemplo utilizamos el objeto `Date` de JavaScript para obtener la fecha 
 
 Abrir el archivo `app.js` y eliminar el mensaje utilizado en la tarea anterior.
 
-- Desafío 1
-
-Ahora que tenemos una variable exportada desde `utils/constants.js`, necesitamos utilizarla en nuestra aplicación principal.
-
-**¿Cómo podemos importar `CURRENT_DATE` desde `constants.js` y mostrar la fecha y hora actual en la terminal utilizando `console.log()`?**
-
-Investigar cómo funciona `require()`, identificar la ruta correcta del módulo y realizar la importación correspondiente.
+> [!TIP]
+> **Desafío 1**
+>
+> Ahora que tenemos una variable exportada desde `utils/constants.js`, necesitamos utilizarla en nuestra aplicación principal.
+>
+> **¿Cómo podemos importar `CURRENT_DATE` desde `constants.js` y mostrar la fecha y hora actual en la terminal utilizando `console.log()`?**
+>
+> Investigar cómo funciona `require()`, identificar la ruta correcta del módulo y realizar la importación correspondiente.
 
 Ejecutar la aplicación utilizando:
 
@@ -223,23 +260,25 @@ npm start
 27/10/2026, 18:30:45
 ```
 
-- Desafío 2
+> [!TIP]
+> **Desafío 2**
+>
+> **¿Qué necesitamos modificar en nuestro proyecto Node.js para utilizar `import` y `export` en lugar de `require()` y `module.exports`?**
+>
+> Investigar y realizar los cambios necesarios para:
+>
+> 1. Configurar el proyecto para utilizar ECMAScript Modules (ESM).
+> 2. Exportar la constante `CURRENT_DATE` utilizando `export`.
+> 3. Importar la constante desde `app.js` utilizando `import`.
+> 4. Ejecutar la aplicación mediante `npm start` y comprobar que se muestra correctamente la fecha y hora en la terminal.
 
-**¿Qué necesitamos modificar en nuestro proyecto Node.js para utilizar import y export en lugar de require() y module.exports?**
+<sub>[⬆ Volver al índice](#contenido)</sub>
 
-Investigar y realizar los cambios necesarios para:
+---
 
-Configurar el proyecto para utilizar ECMAScript Modules (ESM).
+## 3. Node_modules, dependencias de producción y desarrollo
 
-Exportar la constante CURRENT_DATE utilizando export.
-
-Importar la constante desde app.js utilizando import.
-
-Ejecutar la aplicación mediante npm start y comprobar que se muestra correctamente la fecha y hora en la terminal.
-
-## Node_modules, dependencias de producción y desarrollo
-
-**1. ¿Qué son las dependencias?**
+### ¿Qué son las dependencias?
 
 Las dependencias son paquetes o librerías externas que incorporamos a nuestro proyecto para utilizar funcionalidades desarrolladas por otros programadores, evitando tener que implementarlas desde cero.
 
@@ -247,9 +286,14 @@ En Node.js utilizamos **NPM (Node Package Manager)** para instalar, actualizar y
 
 Los paquetes instalados se registran en el archivo `package.json` y normalmente se almacenan dentro del directorio `node_modules`.
 
-**2. Tipos de dependencias**
+### Tipos de dependencias
 
-**Dependencias de producción — dependencies**
+| Tipo           | Propiedad en `package.json` | ¿Cuándo se usa?                          | Instalación              |
+| -------------- | --------------------------- | ---------------------------------------- | ------------------------ |
+| **Producción** | `dependencies`              | La aplicación la necesita para funcionar | `npm install axios`      |
+| **Desarrollo** | `devDependencies`           | Solo durante el proceso de desarrollo    | `npm install -D nodemon` |
+
+#### Dependencias de producción
 
 Son aquellas que nuestra aplicación necesita para funcionar durante su ejecución.
 
@@ -263,7 +307,7 @@ npm install axios
 
 Por defecto, NPM registra el paquete dentro de la propiedad `dependencies` de nuestro `package.json`.
 
-**Dependencias de desarrollo — devDependencies**
+#### Dependencias de desarrollo
 
 Son herramientas utilizadas principalmente durante el proceso de desarrollo, pero que no son necesarias para ejecutar nuestra aplicación en producción.
 
@@ -283,7 +327,7 @@ npm install -D nodemon
 
 NPM registra este paquete dentro de la propiedad `devDependencies`.
 
-**3. Nuestro archivo package.json**
+### Nuestro archivo package.json
 
 Después de instalar ambas dependencias, nuestro archivo `package.json` tendrá una estructura similar a la siguiente:
 
@@ -305,14 +349,17 @@ Después de instalar ambas dependencias, nuestro archivo `package.json` tendrá 
 }
 ```
 
-_Las versiones son ilustrativas. NPM registrará las versiones correspondientes a los paquetes instalados._
+> [!NOTE]
+> Las versiones son ilustrativas. NPM registrará las versiones correspondientes a los paquetes instalados.
 
 Observemos que incorporamos dos scripts:
 
-- `npm start`: ejecuta nuestra aplicación utilizando Node.js.
-- `npm run dev`: ejecuta nuestra aplicación utilizando Nodemon, reiniciándola automáticamente cuando detecta cambios.
+| Script        | Qué ejecuta                                                         |
+| ------------- | ------------------------------------------------------------------- |
+| `npm start`   | Ejecuta nuestra aplicación utilizando Node.js                       |
+| `npm run dev` | Ejecuta la aplicación con Nodemon y la reinicia al detectar cambios |
 
-**4. ¿Por qué es importante diferenciarlas?**
+### ¿Por qué es importante diferenciarlas?
 
 Separar las dependencias permite identificar qué paquetes necesita nuestra aplicación para funcionar y cuáles se utilizan únicamente durante el desarrollo.
 
@@ -322,13 +369,20 @@ En un entorno de producción, podemos instalar solamente las dependencias necesa
 npm ci --omit=dev
 ```
 
-Este comando utiliza el archivo `package-lock.json` para instalar las dependencias de forma reproducible, omitiendo las dependencias exclusivas de desarrollo.
+> [!TIP]
+> Este comando utiliza el archivo `package-lock.json` para instalar las dependencias de forma reproducible, omitiendo las dependencias exclusivas de desarrollo.
 
-## Reforzamiento de JavaScript — Conceptos fundamentales para Node.js
+<sub>[⬆ Volver al índice](#contenido)</sub>
 
-### 1. Functions
+---
 
-**¿Qué es una función?**
+## 4. Reforzamiento de JavaScript
+
+Conceptos fundamentales de JavaScript que necesitamos dominar para desarrollar con Node.js.
+
+### 4.1 Functions
+
+#### ¿Qué es una función?
 
 Una **función** es un bloque de código reutilizable que permite realizar una tarea específica.
 
@@ -357,7 +411,7 @@ Hello, World!
 
 La función `greet()` se ejecuta cuando la invocamos utilizando paréntesis `()`.
 
-**Declaración de funciones**
+#### Declaración de funciones
 
 Es la forma tradicional de definir funciones en JavaScript.
 
@@ -381,11 +435,9 @@ const multiply = function (a, b) {
 console.log(multiply(5, 3)); // 15
 ```
 
-**Arrow Functions**
+#### Arrow Functions
 
 Las **arrow functions** fueron introducidas en ES6 y permiten escribir funciones de manera más concisa.
-
-**Ejemplo**
 
 Función tradicional:
 
@@ -416,9 +468,10 @@ const createUser = (name, age) => ({
 console.log(createUser("John", 25));
 ```
 
-**Importante:** las arrow functions no tienen su propio `this`, por lo que no siempre son intercambiables con las funciones tradicionales.
+> [!WARNING]
+> Las arrow functions no tienen su propio `this`, por lo que no siempre son intercambiables con las funciones tradicionales.
 
-**Parámetros y argumentos**
+#### Parámetros y argumentos
 
 Los **parámetros** son las variables que declaramos al definir una función.
 
@@ -449,7 +502,7 @@ console.log(greet("Anna")); // Hello, Anna!
 
 El valor predeterminado se utiliza cuando el argumento es `undefined` o no se proporciona.
 
-**Return — Retorno de valores**
+#### Return — Retorno de valores
 
 La palabra reservada `return` permite devolver un valor desde una función.
 
@@ -469,9 +522,10 @@ const result = calculatePrice(100, 0.21);
 console.log(result); // 121
 ```
 
-**Importante:** si una función no contiene `return`, devuelve `undefined` de manera implícita.
+> [!NOTE]
+> Si una función no contiene `return`, devuelve `undefined` de manera implícita.
 
-**Rest Parameters (...)**
+#### Rest Parameters (...)
 
 Los parámetros rest permiten recibir una cantidad variable de argumentos y agruparlos en un array.
 
@@ -488,7 +542,7 @@ console.log(sum(10, 20, 30, 40)); // 100
 
 En este ejemplo, `...numbers` agrupa los argumentos recibidos en un array.
 
-**Funciones puras (Pure Functions)**
+#### Funciones puras (Pure Functions)
 
 Una función pura es aquella que:
 
@@ -521,9 +575,10 @@ console.log(total); // 90
 
 En el segundo ejemplo, la función modifica una variable externa.
 
-**Buena práctica:** cuando sea posible, preferir funciones puras porque facilitan las pruebas, el mantenimiento y la reutilización del código.
+> [!TIP]
+> Cuando sea posible, preferir funciones puras porque facilitan las pruebas, el mantenimiento y la reutilización del código.
 
-**Scope — Alcance de las variables**
+#### Scope — Alcance de las variables
 
 El **scope** determina desde qué partes del código podemos acceder a una variable.
 
@@ -546,7 +601,7 @@ La variable `APP_NAME` pertenece al ámbito exterior, mientras que `message` est
 
 Por lo tanto, `message` no está disponible fuera de `showApp()`.
 
-**Funciones asíncronas (Async Functions)**
+#### Funciones asíncronas (Async Functions)
 
 Las funciones asíncronas permiten trabajar con operaciones que necesitan esperar un resultado, como consultas a APIs o bases de datos.
 
@@ -571,9 +626,10 @@ const showUser = async () => {
 showUser();
 ```
 
-**Importante:** una función declarada con `async` siempre devuelve una Promise, incluso cuando retorna un valor directamente.
+> [!NOTE]
+> Una función declarada con `async` siempre devuelve una Promise, incluso cuando retorna un valor directamente.
 
-**Buenas prácticas**
+#### Buenas prácticas
 
 Al desarrollar funciones en JavaScript, es recomendable seguir algunos principios de Clean Code:
 
@@ -601,9 +657,11 @@ const calculateTotalPrice = (price, quantity) => {
 };
 ```
 
-### 2. Callbacks
+<sub>[⬆ Volver al índice](#contenido)</sub>
 
-**¿Qué es un Callback?**
+### 4.2 Callbacks
+
+#### ¿Qué es un callback?
 
 Un **callback** es una función que se pasa como argumento a otra función para que esta pueda ejecutarla en un momento determinado.
 
@@ -638,9 +696,10 @@ En este ejemplo:
 - `sayGoodbye` se pasa como argumento sin ejecutarse inmediatamente.
 - `callback()` ejecuta la función recibida.
 
-**Importante:** cuando pasamos una función como callback, utilizamos su nombre sin paréntesis: `sayGoodbye`. Si escribimos `sayGoodbye()`, estaríamos ejecutándola inmediatamente y pasando su resultado.
+> [!WARNING]
+> Cuando pasamos una función como callback, utilizamos su nombre sin paréntesis: `sayGoodbye`. Si escribimos `sayGoodbye()`, estaríamos ejecutándola inmediatamente y pasando su resultado.
 
-**Callbacks síncronos (Synchronous Callbacks)**
+#### Callbacks síncronos (Synchronous Callbacks)
 
 Un callback síncrono se ejecuta durante la ejecución de la función que lo recibe, sin esperar una operación asíncrona.
 
@@ -662,7 +721,7 @@ La función `calculate()` no necesita conocer qué operación matemática debe r
 
 Este mecanismo permite separar responsabilidades y reutilizar código.
 
-**Callbacks con métodos de Arrays**
+#### Callbacks con métodos de arrays
 
 Ya utilizamos callbacks al trabajar con métodos como `map()`, `filter()` y `forEach()`.
 
@@ -676,7 +735,7 @@ console.log(updatedPrices); // [200, 400, 600]
 
 La arrow function `(price) => price * 2` es el callback que `map()` ejecuta por cada elemento del array.
 
-**3. Callbacks asíncronos (Asynchronous Callbacks)**
+#### Callbacks asíncronos (Asynchronous Callbacks)
 
 Un callback asíncrono es una función que se ejecuta después de que se completa una operación o cuando ocurre un evento.
 
@@ -687,7 +746,7 @@ En Node.js, los callbacks se utilizan para trabajar con operaciones como:
 - Temporizadores.
 - Operaciones de entrada y salida (I/O).
 
-**Ejemplo con setTimeout()**
+**Ejemplo con `setTimeout()`**
 
 ```javascript
 console.log("Starting application...");
@@ -714,9 +773,12 @@ Task completed!
 3. El programa continúa ejecutando las siguientes instrucciones.
 4. Después de aproximadamente 2 segundos, el callback se ejecuta cuando el entorno de ejecución puede procesarlo.
 
-**Importante:** `setTimeout()` no detiene la ejecución del programa y el tiempo indicado representa una espera mínima aproximada, no un momento exacto garantizado.
+> [!IMPORTANT]
+> `setTimeout()` no detiene la ejecución del programa y el tiempo indicado representa una espera mínima aproximada, no un momento exacto garantizado.
 
-### 3. Factory Functions
+<sub>[⬆ Volver al índice](#contenido)</sub>
+
+### 4.3 Factory Functions
 
 Una **factory function** es una función que crea y devuelve objetos.
 
@@ -749,11 +811,12 @@ Hello, my name is Anna
 
 Las factory functions son útiles para crear objetos reutilizables y organizar la lógica de nuestra aplicación.
 
-**Tarea 012 — Factory Functions para crear objetos persona**
+#### Tarea 005: Factory Functions para crear objetos persona
 
-**Objetivo\***
-
-Implementar una Factory Function para crear objetos reutilizables, utilizando dependencias externas de NPM para generar identificadores únicos y calcular automáticamente la edad de una persona.
+> [!IMPORTANT]
+> **Objetivo**
+>
+> Implementar una Factory Function para crear objetos reutilizables, utilizando dependencias externas de NPM para generar identificadores únicos y calcular automáticamente la edad de una persona.
 
 En este ejercicio vamos a crear una función llamada `createPerson()` que permita generar personas con la siguiente estructura:
 
@@ -781,9 +844,10 @@ Utilizaremos dos librerías externas:
 npm install uuid get-age
 ```
 
-Estas dependencias deberán registrarse dentro de `dependencies` en nuestro archivo `package.json`.
+> [!NOTE]
+> Estas dependencias deberán registrarse dentro de `dependencies` en nuestro archivo `package.json`.
 
-**Estructura del archivos**
+**Estructura de archivos**
 
 Dentro de `src`, crear un directorio llamado `factories` y un archivo llamado `person.factory.js`.
 
@@ -809,7 +873,8 @@ La función deberá:
 4. Retornar un nuevo objeto con las propiedades `id`, `name`, `birthdate` y `age`.
 5. Utilizar una Arrow Function y ECMAScript Modules (ESM).
 
-la fecha de nacimiento deberá recibirse en formato `YYYY-MM-DD`, por ejemplo `2000-05-15`.
+> [!NOTE]
+> La fecha de nacimiento deberá recibirse en formato `YYYY-MM-DD`, por ejemplo `2000-05-15`.
 
 **Utilizar nuestra Factory Function**
 
@@ -820,427 +885,36 @@ Desde el archivo `app.js`:
 3. Almacenar las personas dentro de un array.
 4. Mostrar el array completo utilizando `console.log()`.
 
-**Desafío**
-
-¿Cómo podemos crear múltiples objetos de personas utilizando una única Factory Function, generando automáticamente sus identificadores y edades mediante dependencias externas?
-
-Investigar cómo importar y utilizar las funciones proporcionadas por `uuid` y `get-age`.
-
-La implementación deberá permitir crear nuevas personas sin modificar la lógica de `createPerson()`.
-
-### 4. Adapter Pattern
-
-El **patrón adaptador** es un patrón de diseño que permite transformar la estructura de datos o la interfaz de un componente para que sea compatible con otro.
-
-Es especialmente útil cuando consumimos APIs externas y necesitamos adaptar sus respuestas a la estructura utilizada por nuestra aplicación.
-
-**Ejemplo**
-
-Supongamos que una API externa nos devuelve:
-
-```javascript
-const apiUser = {
-  first_name: "John",
-  last_name: "Doe",
-};
-```
-
-Pero nuestra aplicación utiliza una propiedad llamada `fullName`.
-
-Podemos crear una función adaptadora:
-
-```javascript
-const userAdapter = (user) => ({
-  fullName: `${user.first_name} ${user.last_name}`,
-});
-
-const user = userAdapter(apiUser);
-
-console.log(user.fullName); // John Doe
-```
-
-De esta manera, evitamos que nuestra aplicación dependa directamente de la estructura de datos de la API externa.
-
-### 5. Promises
-
-Una **promesa** representa el resultado futuro de una operación que puede completarse correctamente o fallar.
-
-Una promesa puede encontrarse en tres estados:
-
-- **Pending:** la operación todavía no terminó.
-- **Fulfilled:** la operación se completó correctamente.
-- **Rejected:** la operación falló.
-
-**Ejemplo**
-
-```javascript
-const getUser = () => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({ id: 1, name: "John" });
-    }, 1000);
-  });
-};
-
-getUser()
-  .then((user) => console.log(user))
-  .catch((error) => console.error(error));
-```
-
-Después de aproximadamente un segundo, obtenemos:
-
-```text
-{ id: 1, name: 'John' }
-```
-
-Utilizamos `.then()` para procesar el resultado y `.catch()` para manejar posibles errores.
-
-Las promesas son fundamentales para trabajar con operaciones asíncronas, como peticiones HTTP o consultas a bases de datos.
-
-### 6. Async / Await
-
-`async` y `await` permiten trabajar con promesas utilizando una sintaxis más sencilla y legible.
-
-- **async:** declara una función asíncrona que siempre devuelve una promesa.
-- **await:** espera el resultado de una promesa antes de continuar con la ejecución de esa función.
-
-**Ejemplo**
-
-Utilizando la función `getUser()` del ejemplo anterior:
-
-```javascript
-const showUser = async () => {
-  try {
-    const user = await getUser();
-
-    console.log(user.name);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-showUser();
-```
-
-**Resultado esperado:**
-
-```text
-John
-```
-
-Aunque utilizamos `await`, JavaScript no bloquea todo el programa mientras espera la respuesta. La función asíncrona suspende su ejecución y permite que otras tareas continúen.
-
-El bloque `try/catch` permite manejar errores de una forma similar a la utilizada en código síncrono.
-
-### 8. Objetos
-
-**Objetos (Objects)**
-
-Un **objeto** es una estructura de datos que permite almacenar información mediante pares de **clave y valor (key-value)**.
-
-Los objetos son fundamentales en JavaScript porque nos permiten representar entidades, como usuarios, productos, criptomonedas o cualquier elemento de nuestra aplicación.
-
-**Crear un objeto**
-
-```javascript
-const user = {
-  id: 1,
-  name: "John",
-  age: 25,
-  isActive: true,
-};
-```
-
-Cada propiedad está formada por una clave (`name`) y un valor (`'John'`).
-
-**Acceder a las propiedades**
-
-Podemos acceder a las propiedades utilizando la notación de punto (`.`) o corchetes (`[]`).
-
-```javascript
-console.log(user.name); // John
-console.log(user["age"]); // 25
-```
-
-**Agregar y modificar propiedades**
-
-```javascript
-user.email = "john@example.com";
-user.age = 26;
-
-console.log(user);
-```
-
-Aunque declaramos el objeto con `const`, podemos modificar sus propiedades. Lo que no podemos hacer es reasignar la variable `user` a otro objeto.
-
-**Métodos de un objeto**
-
-Un objeto también puede contener funciones, conocidas como métodos.
-
-```javascript
-const user = {
-  name: "John",
-  greet() {
-    return `Hello, ${this.name}`;
-  },
-};
-
-console.log(user.greet()); // Hello, John
-```
-
-**Desestructuración de objetos (Object Destructuring)**
-
-La desestructuración permite extraer propiedades de un objeto y asignarlas a variables de manera más sencilla.
-
-**Ejemplo**
-
-```javascript
-const crypto = {
-  id: "bitcoin",
-  symbol: "btc",
-  price: 80800,
-};
-
-const { symbol, price } = crypto;
-
-console.log(symbol); // btc
-console.log(price); // 80800
-```
-
-También podemos renombrar las variables:
-
-```javascript
-const { price: currentPrice } = crypto;
-
-console.log(currentPrice); // 80800
-```
-
-**Spread Operator en objetos (...)**
-
-El operador spread (`...`) permite copiar propiedades de un objeto o combinar varios objetos.
-
-**Ejemplo**
-
-```javascript
-const user = {
-  name: "John",
-  age: 25,
-};
-
-const updatedUser = {
-  ...user,
-  age: 26,
-  isActive: true,
-};
-
-console.log(updatedUser);
-```
-
-**Resultado esperado:**
-
-```javascript
-{
-  name: 'John',
-  age: 26,
-  isActive: true
-}
-```
-
-Este mecanismo resulta especialmente útil para trabajar con **inmutabilidad**, evitando modificar directamente el objeto original.
-
-**Importante:** spread realiza una copia superficial (_shallow copy_). Los objetos anidados siguen compartiendo sus referencias.
+> [!TIP]
+> **Desafío**
+>
+> ¿Cómo podemos crear múltiples objetos de personas utilizando una única Factory Function, generando automáticamente sus identificadores y edades mediante dependencias externas?
+>
+> Investigar cómo importar y utilizar las funciones proporcionadas por `uuid` y `get-age`.
+>
+> La implementación deberá permitir crear nuevas personas sin modificar la lógica de `createPerson()`.
+
+<sub>[⬆ Volver al índice](#contenido)</sub>
+
+> [!NOTE]
+> El reforzamiento de JavaScript continúa en la **Clase 3** con Adapter Pattern, Promises, Async/Await, Objetos, Arrays y **Closures**.
 
 ---
 
-### 9. Arrays
-
-Un **array** es una estructura de datos que permite almacenar múltiples valores dentro de una misma variable.
-
-A diferencia de los objetos, sus elementos se organizan mediante índices numéricos que comienzan en `0`.
-
-**Crear un array**
-
-```javascript
-const cryptocurrencies = ["Bitcoin", "Ethereum", "Stellar"];
-```
-
-**Acceder a sus elementos**
-
-```javascript
-console.log(cryptocurrencies[0]); // Bitcoin
-console.log(cryptocurrencies[1]); // Ethereum
-console.log(cryptocurrencies.length); // 3
-```
-
-**Agregar y eliminar elementos**
-
-```javascript
-const cryptocurrencies = ["Bitcoin", "Ethereum"];
-
-// Agregar al final
-cryptocurrencies.push("Stellar");
-
-// Eliminar el último
-cryptocurrencies.pop();
-
-console.log(cryptocurrencies);
-```
-
-Los métodos `push()` y `pop()` modifican el array original.
-
-**Arrays de objetos**
-
-En aplicaciones reales es frecuente trabajar con arrays que contienen objetos.
-
-Por ejemplo, una API puede devolver una colección de criptomonedas:
-
-```javascript
-const cryptocurrencies = [
-  { id: 1, name: "Bitcoin", price: 80800 },
-  { id: 2, name: "Ethereum", price: 3500 },
-  { id: 3, name: "Stellar", price: 0.35 },
-];
-```
-
-Podemos acceder a una propiedad de un objeto dentro del array:
-
-```javascript
-console.log(cryptocurrencies[0].name); // Bitcoin
-console.log(cryptocurrencies[1].price); // 3500
-```
-
-**Principales métodos de Arrays**
-
-JavaScript proporciona métodos que permiten recorrer, transformar y buscar elementos dentro de un array.
-
-- **forEach() — Recorrer elementos**
-
-Ejecuta una función por cada elemento del array.
-
-```javascript
-const cryptocurrencies = ["Bitcoin", "Ethereum", "Stellar"];
-
-cryptocurrencies.forEach((crypto) => {
-  console.log(crypto);
-});
-```
-
-**Resultado:**
-
-```text
-Bitcoin
-Ethereum
-Stellar
-```
-
-- **map() — Transformar elementos**
-
-Crea un nuevo array aplicando una transformación a cada elemento.
-
-```javascript
-const prices = [100, 200, 300];
-
-const updatedPrices = prices.map((price) => price * 2);
-
-console.log(updatedPrices); // [200, 400, 600]
-```
-
-El array original permanece sin modificaciones.
-
-- **filter() — Filtrar elementos**
-
-Crea un nuevo array que contiene únicamente los elementos que cumplen una condición.
-
-```javascript
-const prices = [100, 200, 300, 400];
-
-const filteredPrices = prices.filter((price) => price > 200);
-
-console.log(filteredPrices); // [300, 400]
-```
-
-- **find() — Buscar un elemento**
-
-Devuelve el primer elemento que cumple una condición.
-
-```javascript
-const cryptocurrencies = [
-  { id: 1, name: "Bitcoin" },
-  { id: 2, name: "Ethereum" },
-  { id: 3, name: "Stellar" },
-];
-
-const crypto = cryptocurrencies.find((item) => item.id === 2);
-
-console.log(crypto); // { id: 2, name: 'Ethereum' }
-```
-
-Si no encuentra un elemento, devuelve `undefined`.
-
-- **some() y every() — Verificar condiciones**
-
-`some()` comprueba si al menos un elemento cumple una condición.
-
-`every()` comprueba si todos los elementos cumplen una condición.
-
-```javascript
-const prices = [100, 200, 300];
-
-const hasExpensive = prices.some((price) => price > 250);
-const allPositive = prices.every((price) => price > 0);
-
-console.log(hasExpensive); // true
-console.log(allPositive); // true
-```
-
-- **reduce() — Acumular valores**
-
-Permite recorrer un array y generar un único resultado acumulado.
-
-```javascript
-const prices = [100, 200, 300];
-
-const total = prices.reduce((accumulator, price) => accumulator + price, 0);
-
-console.log(total); // 600
-```
-
-**Desestructuración y Spread en Arrays**
-
-- **Array Destructuring**
-
-Permite extraer elementos de un array y asignarlos a variables.
-
-```javascript
-const cryptocurrencies = ["Bitcoin", "Ethereum", "Stellar"];
-
-const [first, second] = cryptocurrencies;
-
-console.log(first); // Bitcoin
-console.log(second); // Ethereum
-```
-
-También podemos intercambiar valores:
-
-```javascript
-let percentageA = 30;
-let percentageB = 70;
-
-[percentageA, percentageB] = [percentageB, percentageA];
-
-console.log(percentageA); // 70
-console.log(percentageB); // 30
-```
-
-- **Spread Operator**
-
-Podemos crear un nuevo array sin modificar el original.
-
-```javascript
-const cryptocurrencies = ["Bitcoin", "Ethereum"];
-
-const updatedCryptos = [...cryptocurrencies, "Stellar"];
-
-console.log(updatedCryptos);
-// ['Bitcoin', 'Ethereum', 'Stellar']
-```
+## Referencias
+
+- 📘 [Node.js — Modules: CommonJS](https://nodejs.org/api/modules.html)
+- 📘 [Node.js — ECMAScript Modules](https://nodejs.org/api/esm.html)
+- 📘 [npm — package.json](https://docs.npmjs.com/cli/v10/configuring-npm/package-json)
+- 📘 [npm — Scripts](https://docs.npmjs.com/cli/v10/using-npm/scripts)
+- 📘 [npm — npm ci](https://docs.npmjs.com/cli/v10/commands/npm-ci)
+- 📗 [MDN — Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions)
+- 📗 [MDN — Arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+- 📗 [MDN — Callback function](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function)
+- 🛠️ [uuid — NPM](https://www.npmjs.com/package/uuid) · [get-age — NPM](https://www.npmjs.com/package/get-age)
+
+## Mentor
+
+**Ariel Duarte** · Kopius · The Academy
+
+<sub>[⬆ Volver al índice](#contenido)</sub>
